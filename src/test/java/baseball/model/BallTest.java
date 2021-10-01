@@ -13,16 +13,16 @@ class BallTest {
 	@Test
 	@DisplayName("각각의 볼을 생성한다.")
 	public void createBall() {
-		Ball ball = new Ball(2);
+		Ball ball = new Ball(2, 0);
 
-		assertThat(ball).isEqualTo(new Ball(2));
+		assertThat(ball).isEqualTo(new Ball(2, 0));
 	}
 
 	@ParameterizedTest
 	@DisplayName("볼은 1~9가 아니면 예외가 발생한다.")
-	@CsvSource(value = "0,10")
-	public void checkBallRange(int ballNumber) {
+	@CsvSource(value = {"0,0", "10,0"})
+	public void checkBallRange(int ballNumber, int position) {
 		assertThrows(IllegalArgumentException.class,
-			() -> new Ball(ballNumber));
+			() -> new Ball(ballNumber, position));
 	}
 }

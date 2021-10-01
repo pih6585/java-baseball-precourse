@@ -10,15 +10,18 @@ public class Ball {
 	private static final int MAX_NUMBER_ASCII_CODE = 57;
 
 	private final int ball;
+	private final int position;
 
-	public Ball(int ball) {
+	public Ball(int ball, int position) {
 		checkBallRange(ball);
 		this.ball = ball;
+		this.position = position;
 	}
 
-	public Ball(char ball) {
+	public Ball(char ball, int position) {
 		checkBallRegular(ball);
 		this.ball = toInt(ball);
+		this.position = position;
 	}
 
 	private static void checkBallRegular(char ball) {
@@ -44,13 +47,12 @@ public class Ball {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Ball ball1 = (Ball)o;
-		return ball == ball1.ball;
+		return ball == ball1.ball && position == ball1.position;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ball);
+		return Objects.hash(ball, position);
 	}
-
 }
 
