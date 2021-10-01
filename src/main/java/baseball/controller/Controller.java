@@ -1,7 +1,7 @@
 package baseball.controller;
 
 import baseball.generator.BallsGenerator;
-import baseball.model.Ball;
+
 import baseball.model.Balls;
 import baseball.model.BaseBallGame;
 import baseball.model.GameReStart;
