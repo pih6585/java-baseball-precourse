@@ -38,12 +38,12 @@ public class BallsGenerator {
 	}
 
 	private static List<Ball> toList(String balls) {
-		List<Ball> list = new ArrayList<>();
-		String[] split = balls.split(REGEX);
-		for (int index = START_INCLUSIVE; index < split.length; index++) {
-			list.add(new Ball(split[index], index));
+		List<Ball> customBalls = new ArrayList<>();
+		String[] tokens = balls.split(REGEX);
+		for (int index = START_INCLUSIVE; index < tokens.length; index++) {
+			customBalls.add(new Ball(tokens[index], index));
 		}
-		return list;
+		return customBalls;
 	}
 
 	private static void checkBallsSize(String balls) {
