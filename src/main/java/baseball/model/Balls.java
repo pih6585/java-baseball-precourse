@@ -19,18 +19,11 @@ public class Balls {
 		this.balls = Collections.unmodifiableList(balls);
 	}
 
-	public Status play(Ball customBalls, int position, Status status) {
-		if (balls.contains(customBalls) && findBall(position).equals(customBalls)) {
-			return status.strike();
-		}
-		if (balls.contains(customBalls)) {
-			return status.ball();
+	public Status play(Ball customBall, Status status) {
+		for (Ball ball : balls) {
+			 status = ball.play(customBall, status);
 		}
 		return status;
-	}
-
-	private Ball findBall(int position) {
-		return balls.get(position);
 	}
 
 	private void checkDuplication(List<Ball> balls) {
