@@ -6,8 +6,6 @@ public class Ball {
 	private static final String CHECK_BALL_RANGE_ERROR_MESSAGE = "볼은 1~9의 숫자만 가능 합니다.";
 	private static final int START_BALL_RANGE_NUMBER = 1;
 	private static final int END_BALL_RANGE_NUMBER = 9;
-	private static final int MIN_NUMBER_ASCII_CODE = 49;
-	private static final int MAX_NUMBER_ASCII_CODE = 57;
 
 	private final int ball;
 	private final int position;
@@ -18,20 +16,13 @@ public class Ball {
 		this.position = position;
 	}
 
-	public Ball(char ball, int position) {
-		checkBallRegular(ball);
+	public Ball(String ball, int position) {
 		this.ball = toInt(ball);
 		this.position = position;
 	}
 
-	private static void checkBallRegular(char ball) {
-		if (ball < MIN_NUMBER_ASCII_CODE || ball > MAX_NUMBER_ASCII_CODE) {
-			throw new IllegalArgumentException(CHECK_BALL_RANGE_ERROR_MESSAGE);
-		}
-	}
-
-	private static int toInt(char ball) {
-		return Character.getNumericValue(ball);
+	private static int toInt(String ball) {
+		return Integer.parseInt(ball);
 	}
 
 	private void checkBallRange(int ball) {
