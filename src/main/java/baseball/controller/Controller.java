@@ -5,7 +5,8 @@ import baseball.generator.BallsGenerator;
 import baseball.model.Balls;
 import baseball.model.BaseBallGame;
 import baseball.model.GameReStart;
-import baseball.model.Status;
+import baseball.model.GameResult;
+
 import baseball.view.InputView;
 import baseball.view.OutputView;
 
@@ -24,16 +25,16 @@ public class Controller {
 	private boolean gameStart(Balls targetBalls) {
 		BaseBallGame baseBallGame = new BaseBallGame(targetBalls);
 
-		Status status = baseBallGame.play(BallsGenerator.createCustomBalls(InputView.inputBalls()));
+		GameResult gameResult = baseBallGame.play(BallsGenerator.createCustomBalls(InputView.inputBalls()));
 
-		while (baseBallGame.isContinue()) {
-			OutputView.printGameResult(status);
-			status = baseBallGame.play(BallsGenerator.createCustomBalls(InputView.inputBalls()));
+		while (baseBallGame.isContinue(gameResult)) {
+			OutputView.printGameResult(gameResult);
+			gameResult = baseBallGame.play(BallsGenerator.createCustomBalls(InputView.inputBalls()));
 		}
 
-		OutputView.printGameResult(status);
+		OutputView.printGameResult(gameResult);
 
-		return !baseBallGame.isContinue();
+		return !baseBallGame.isContinue(gameResult);
 	}
 
 	private boolean isReGame() {

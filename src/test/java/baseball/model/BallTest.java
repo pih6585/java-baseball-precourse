@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-
 class BallTest {
 
 	@Test
@@ -27,16 +26,21 @@ class BallTest {
 			() -> new Ball(ballNumber, position));
 	}
 
+	@ParameterizedTest
+	@DisplayName("볼에 숫자가 아닌 다른 문자 입력시 예외가 발생된다.")
+	@CsvSource(value = {"a,0", "!,1", "ㄱ,2"})
+	public void checkBallType(String ballNumber, int position) {
+		assertThrows(IllegalArgumentException.class,
+			() -> new Ball(ballNumber, position));
+	}
+
 	@Test
 	@DisplayName("볼과 볼의 자리수와 값이 일치하면 스트라이크이다.")
 	public void playStrike() {
 		Ball targetBall = new Ball(1, 0);
 		Ball customBall = new Ball(1, 0);
 
-		Status init = Status.init();
-		Status status = targetBall.play(customBall, init);
-
-		assertThat(status.getStrike()).isEqualTo(1);
+		assertThat(targetBall.play(customBall)).isEqualTo(Status.STRIKE);
 	}
 
 	@Test
@@ -45,10 +49,7 @@ class BallTest {
 		Ball targetBall = new Ball(1, 0);
 		Ball customBall = new Ball(1, 1);
 
-		Status init = Status.init();
-		Status status = targetBall.play(customBall, init);
-
-		assertThat(status.getBall()).isEqualTo(1);
+		assertThat(targetBall.play(customBall)).isEqualTo(Status.BALL);
 	}
 
 	@Test
@@ -57,9 +58,6 @@ class BallTest {
 		Ball targetBall = new Ball(1, 0);
 		Ball customBall = new Ball(2, 0);
 
-		Status init = Status.init();
-		Status status = targetBall.play(customBall, init);
-
-		assertThat(status.isNothing()).isTrue();
+		assertThat(targetBall.play(customBall)).isEqualTo(Status.NOTHING);
 	}
 }

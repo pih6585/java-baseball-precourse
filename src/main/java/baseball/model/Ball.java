@@ -40,14 +40,14 @@ public class Ball {
 		}
 	}
 
-	public Status play(Ball customBall, Status status) {
+	public Status play(Ball customBall) {
 		if (this.equals(customBall)) {
-			return status.strike();
+			return Status.STRIKE;
 		}
 		if (isSameNumber(customBall.ball)) {
-			return status.ball();
+			return Status.BALL;
 		}
-		return status;
+		return Status.NOTHING;
 	}
 
 	public boolean isSameNumber(int ball) {

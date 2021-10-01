@@ -1,27 +1,39 @@
 package baseball.model;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class BaseBallGame {
 
-	private Status status;
+	public static final int INITIAL_PRIZE_COUNT = 0;
+	public static final int ADDITION_PRIZE_COUNT = 1;
+
 	private final Balls targetBalls;
 
 	public BaseBallGame(Balls targetBalls) {
 		this.targetBalls = targetBalls;
-		status = Status.init();
 	}
 
-	public boolean isContinue() {
-		return !status.isPerfectStrike();
+	public boolean isContinue(GameResult gameResult) {
+		return gameResult.isContinueGame();
 	}
 
-	public Status play(Balls customBalls) {
-		status = Status.init();
-		for (Ball ball : customBalls.getBalls()) {
-			status = targetBalls.play(ball, status);
+	public GameResult play(Balls customBalls) {
+		Map<Status, Integer> results = initResult();
+		for (Ball ball : targetBalls.getBalls()) {
+			Status status = customBalls.play(ball);
+			results.computeIfPresent(status, (oldStatus, oldCount) -> oldCount + ADDITION_PRIZE_COUNT);
 		}
-		return status;
+		return new GameResult(results);
+	}
+
+	private Map<Status, Integer> initResult() {
+		LinkedHashMap<Status, Integer> map = new LinkedHashMap<>();
+		for (Status status : Status.getValues()) {
+			map.put(status, INITIAL_PRIZE_COUNT);
+		}
+		return map;
 	}
 
 	@Override
@@ -31,11 +43,11 @@ public class BaseBallGame {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		BaseBallGame that = (BaseBallGame)o;
-		return Objects.equals(status, that.status) && Objects.equals(targetBalls, that.targetBalls);
+		return Objects.equals(targetBalls, that.targetBalls);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(status, targetBalls);
+		return Objects.hash(targetBalls);
 	}
 }

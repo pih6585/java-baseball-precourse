@@ -19,11 +19,14 @@ public class Balls {
 		this.balls = Collections.unmodifiableList(balls);
 	}
 
-	public Status play(Ball customBall, Status status) {
+	public Status play(Ball customBall) {
 		for (Ball ball : balls) {
-			 status = ball.play(customBall, status);
+			Status status = ball.play(customBall);
+			if (Status.isNotNothing(status)) {
+				return status;
+			}
 		}
-		return status;
+		return Status.NOTHING;
 	}
 
 	private void checkDuplication(List<Ball> balls) {
