@@ -1,6 +1,7 @@
 package baseball.model;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +25,7 @@ class BaseBallGameTest {
 	public void isEndGame() {
 		Balls targetBalls = BallsGenerator.createTargetBalls();
 		BaseBallGame baseBallGame = new BaseBallGame(targetBalls);
-		Assertions.assertAll(
+		assertAll(
 			() -> assertThat(baseBallGame.isContinue()).isTrue(),
 			() -> {
 				baseBallGame.play(targetBalls);
@@ -40,7 +41,8 @@ class BaseBallGameTest {
 		BaseBallGame baseBallGame = new BaseBallGame(targetBalls);
 		Status gameResult = baseBallGame.play(BallsGenerator.createCustomBalls("145"));
 
-		Assertions.assertAll(
+		assertAll(
+
 			() -> assertThat(gameResult.existStrike()).isTrue(),
 			() -> {
 				Status gameResult2 = baseBallGame.play(BallsGenerator.createCustomBalls("415"));

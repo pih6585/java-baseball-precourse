@@ -4,9 +4,6 @@ import java.util.Objects;
 
 public class BaseBallGame {
 
-	private static final int START_INCLUSIVE = 0;
-	private static final int END_EXCLUSIVE = 3;
-
 	private Status status;
 	private final Balls targetBalls;
 
@@ -21,8 +18,8 @@ public class BaseBallGame {
 
 	public Status play(Balls customBalls) {
 		status = Status.init();
-		for (int index = START_INCLUSIVE; index < END_EXCLUSIVE; index++) {
-			status = targetBalls.play(customBalls.getBalls().get(index), index, status);
+		for (Ball ball : customBalls.getBalls()) {
+			status = targetBalls.play(ball, status);
 		}
 		return status;
 	}
