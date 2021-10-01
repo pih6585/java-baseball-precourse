@@ -40,6 +40,20 @@ public class Ball {
 		}
 	}
 
+	public Status play(Ball customBall, Status status) {
+		if (this.equals(customBall)) {
+			return status.strike();
+		}
+		if (isSameNumber(customBall.ball)) {
+			return status.ball();
+		}
+		return status;
+	}
+
+	public boolean isSameNumber(int ball) {
+		return this.ball == ball;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -54,5 +68,6 @@ public class Ball {
 	public int hashCode() {
 		return Objects.hash(ball, position);
 	}
+
 }
 
