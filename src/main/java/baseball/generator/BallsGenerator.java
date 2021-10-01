@@ -19,15 +19,15 @@ public class BallsGenerator {
 	public static Balls createTargetBalls() {
 		List<Ball> balls = new ArrayList<>();
 		for (int i = START_INCLUSIVE; i < END_EXCLUSIVE; i++) {
-			balls.add(addBall(balls));
+			balls.add(addBall(balls, i));
 		}
 		return new Balls(balls);
 	}
 
-	private static Ball addBall(List<Ball> balls) {
-		Ball ball = new Ball(Randoms.pickNumberInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER));
+	private static Ball addBall(List<Ball> balls, int position) {
+		Ball ball = new Ball(Randoms.pickNumberInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER), position);
 		if (balls.contains(ball)) {
-			return addBall(balls);
+			return addBall(balls, position);
 		}
 		return ball;
 	}
@@ -40,7 +40,7 @@ public class BallsGenerator {
 	private static List<Ball> toList(String balls) {
 		List<Ball> list = new ArrayList<>();
 		for (int i = START_INCLUSIVE; i < balls.length(); i++) {
-			list.add(new Ball(balls.charAt(i)));
+			list.add(new Ball(balls.charAt(i), i));
 		}
 		return list;
 	}
