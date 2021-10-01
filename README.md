@@ -51,6 +51,8 @@
 - [x] 게임 종료시 새로운 게임을 진행 할 수 있다.
 
 ### TODO LIST - STEP1
-- [] ball에 위치값을 지정한다.
-- [] balls에 status를 가져오는 책임을 ball에 위임한다.
-- [] balls 생성시 char -> string 으로 변경한다.
+- [x] ball에 위치값을 지정한다.
+- [x] balls에 status를 가져오는 책임을 ball에 위임한다.
+- [x] balls 생성시 char -> string 으로 변경한다.
+- [] status를 enum으로 변경해본다.
+- [] game에 대한 result는 별도로 관리한다.  
