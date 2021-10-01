@@ -10,6 +10,8 @@ import nextstep.utils.Randoms;
 public class BallsGenerator {
 
 	private static final String CHECK_BALLS_SIZE_ERROR_MESSAGE = "야구게임의 볼은 3자리 입니다.";
+	private static final String CHECK_MATCH_TYPE_ERROR_MESSAGE = "숫자만 입력 가능 합니다.";
+	private static final String INT_REG_EXP = "^\\d+$";
 	private static final String REGEX = "";
 	private static final int START_INCLUSIVE = 0;
 	private static final int BALLS_SIZE = 3;
@@ -34,16 +36,27 @@ public class BallsGenerator {
 
 	public static Balls createCustomBalls(String balls) {
 		checkBallsSize(balls);
+		checkMatchTypeNumber(balls);
 		return new Balls(toList(balls));
 	}
 
 	private static List<Ball> toList(String balls) {
 		List<Ball> customBalls = new ArrayList<>();
-		String[] tokens = balls.split(REGEX);
+		String[] tokens = toSplit(balls);
 		for (int index = START_INCLUSIVE; index < tokens.length; index++) {
 			customBalls.add(new Ball(tokens[index], index));
 		}
 		return customBalls;
+	}
+
+	private static String[] toSplit(String balls) {
+		return balls.split(REGEX);
+	}
+
+	private static void checkMatchTypeNumber(String balls) {
+		if (!balls.matches(INT_REG_EXP)) {
+			throw new IllegalArgumentException(CHECK_MATCH_TYPE_ERROR_MESSAGE);
+		}
 	}
 
 	private static void checkBallsSize(String balls) {

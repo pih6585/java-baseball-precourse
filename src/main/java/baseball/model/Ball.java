@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class Ball {
 	private static final String CHECK_BALL_RANGE_ERROR_MESSAGE = "볼은 1~9의 숫자만 가능 합니다.";
-	private static final String CHECK_MATCH_TYPE_ERROR_MESSAGE = "숫자만 입력 가능 합니다.";
-	private static final String INT_REG_EXP = "^\\d+$";
 	private static final int START_BALL_RANGE_NUMBER = 1;
 	private static final int END_BALL_RANGE_NUMBER = 9;
 
@@ -19,15 +17,8 @@ public class Ball {
 	}
 
 	public Ball(String ball, int position) {
-		checkMatchTypeNumber(ball);
 		this.ball = toInt(ball);
 		this.position = position;
-	}
-
-	private void checkMatchTypeNumber(String ball) {
-		if (!ball.matches(INT_REG_EXP)) {
-			throw new IllegalArgumentException(CHECK_MATCH_TYPE_ERROR_MESSAGE);
-		}
 	}
 
 	private static int toInt(String ball) {

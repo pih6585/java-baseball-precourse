@@ -26,14 +26,6 @@ class BallTest {
 			() -> new Ball(ballNumber, position));
 	}
 
-	@ParameterizedTest
-	@DisplayName("볼에 숫자가 아닌 다른 문자 입력시 예외가 발생된다.")
-	@CsvSource(value = {"a,0", "!,1", "ㄱ,2"})
-	public void checkBallType(String ballNumber, int position) {
-		assertThrows(IllegalArgumentException.class,
-			() -> new Ball(ballNumber, position));
-	}
-
 	@Test
 	@DisplayName("볼과 볼의 자리수와 값이 일치하면 스트라이크이다.")
 	public void playStrike() {
