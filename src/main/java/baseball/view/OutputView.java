@@ -40,4 +40,8 @@ public class OutputView {
 	public static void printEndGame() {
 		System.out.println(RE_END_GAME_MESSAGE);
 	}
+
+	public static void printErrorMessage(String errorMessage) {
+		System.out.println(errorMessage);
+	}
 }
