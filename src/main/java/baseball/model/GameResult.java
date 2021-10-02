@@ -1,5 +1,6 @@
 package baseball.model;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ public class GameResult {
 	private final Map<Status, Integer> result;
 
 	public GameResult(Map<Status, Integer> result) {
-		this.result = result;
+		this.result = Collections.unmodifiableMap(result);
 	}
 
 	public boolean isNothing() {
