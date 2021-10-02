@@ -28,10 +28,19 @@ public class BallsGenerator {
 
 	private static Ball addBall(List<Ball> balls, int position) {
 		Ball ball = new Ball(Randoms.pickNumberInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER), position);
-		if (balls.contains(ball)) {
+		if (checkExistBall(balls, ball)) {
 			return addBall(balls, position);
 		}
 		return ball;
+	}
+
+	private static boolean checkExistBall(List<Ball> balls, Ball ball) {
+		for (Ball matchBall : balls) {
+			if (matchBall.isSameNumber(ball)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static Balls createCustomBalls(String balls) {

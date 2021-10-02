@@ -35,14 +35,14 @@ public class Ball {
 		if (this.equals(customBall)) {
 			return Status.STRIKE;
 		}
-		if (isSameNumber(customBall.ball)) {
+		if (isSameNumber(customBall)) {
 			return Status.BALL;
 		}
 		return Status.NOTHING;
 	}
 
-	public boolean isSameNumber(int ball) {
-		return this.ball == ball;
+	public boolean isSameNumber(Ball ball) {
+		return this.ball == ball.ball;
 	}
 
 	@Override
