@@ -8,11 +8,11 @@ public class ReStartValidation {
 	private static final String INT_REG_EXP = "[12]";
 	private static final String EMPTY_MESSAGE = "";
 
-	private final boolean error;
+	private final boolean errorStatus;
 	private final String message;
 
-	private ReStartValidation(boolean error, String message) {
-		this.error = error;
+	private ReStartValidation(boolean errorStatus, String message) {
+		this.errorStatus = errorStatus;
 		this.message = message;
 	}
 
@@ -28,7 +28,7 @@ public class ReStartValidation {
 	}
 
 	public boolean isProblem() {
-		return error;
+		return errorStatus;
 	}
 
 	public String getErrorMessage() {
@@ -42,11 +42,11 @@ public class ReStartValidation {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		ReStartValidation that = (ReStartValidation)o;
-		return error == that.error && Objects.equals(message, that.message);
+		return errorStatus == that.errorStatus && Objects.equals(message, that.message);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(error, message);
+		return Objects.hash(errorStatus, message);
 	}
 }

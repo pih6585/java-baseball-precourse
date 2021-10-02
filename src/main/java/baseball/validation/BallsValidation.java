@@ -13,11 +13,11 @@ public class BallsValidation {
 	private static final String INT_REG_EXP = "(^[1-9]*$)";
 	private static final int BALLS_SIZE = 3;
 
-	private final boolean error;
+	private final boolean errorStatus;
 	private final String message;
 
-	private BallsValidation(boolean error, String message) {
-		this.error = error;
+	private BallsValidation(boolean errorStatus, String message) {
+		this.errorStatus = errorStatus;
 		this.message = message;
 	}
 
@@ -45,7 +45,7 @@ public class BallsValidation {
 	}
 
 	public boolean isProblem() {
-		return error;
+		return errorStatus;
 	}
 
 	public String getErrorMessage() {
@@ -59,11 +59,11 @@ public class BallsValidation {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		BallsValidation that = (BallsValidation)o;
-		return error == that.error && Objects.equals(message, that.message);
+		return errorStatus == that.errorStatus && Objects.equals(message, that.message);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(error, message);
+		return Objects.hash(errorStatus, message);
 	}
 }
