@@ -19,28 +19,27 @@ public class BallsGenerator {
 	private static final int MAX_BALL_NUMBER = 9;
 
 	public static Balls createTargetBalls() {
-		List<Ball> balls = new ArrayList<>();
+		List<Integer> balls = new ArrayList<>();
 		for (int i = START_INCLUSIVE; i < BALLS_SIZE; i++) {
-			balls.add(addBall(balls, i));
+			balls.add(addBall(balls));
 		}
-		return new Balls(balls);
+		return createBalls(balls);
 	}
 
-	private static Ball addBall(List<Ball> balls, int position) {
-		Ball ball = new Ball(Randoms.pickNumberInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER), position);
-		if (checkExistBall(balls, ball)) {
-			return addBall(balls, position);
+	private static Balls createBalls(List<Integer> balls) {
+		List<Ball> targetBalls = new ArrayList<>();
+		for (int index = 0; index < balls.size(); index++) {
+			targetBalls.add(new Ball(balls.get(index), index));
+		}
+		return new Balls(targetBalls);
+	}
+
+	private static int addBall(List<Integer> balls) {
+		int ball = Randoms.pickNumberInRange(MIN_BALL_NUMBER, MAX_BALL_NUMBER);
+		if (balls.contains(ball)) {
+			return addBall(balls);
 		}
 		return ball;
-	}
-
-	private static boolean checkExistBall(List<Ball> balls, Ball ball) {
-		for (Ball matchBall : balls) {
-			if (matchBall.isSameNumber(ball)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public static Balls createCustomBalls(String balls) {

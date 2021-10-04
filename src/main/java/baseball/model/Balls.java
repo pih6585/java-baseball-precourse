@@ -20,13 +20,19 @@ public class Balls {
 	}
 
 	public Status play(Ball customBall) {
+		Status status = Status.NOTHING;
 		for (Ball ball : balls) {
-			Status status = ball.play(customBall);
-			if (Status.isNotNothing(status)) {
-				return status;
-			}
+			Status playStatus = ball.play(customBall);
+			status = playResult(playStatus, status);
 		}
-		return Status.NOTHING;
+		return status;
+	}
+
+	private Status playResult(Status playStatus, Status ballStatus) {
+		if (Status.isNotNothing(playStatus)) {
+			return playStatus;
+		}
+		return ballStatus;
 	}
 
 	private void checkDuplication(List<Ball> balls) {
