@@ -9,6 +9,7 @@ import baseball.model.GameResult;
 
 import baseball.validation.BallsValidation;
 import baseball.validation.ReStartValidation;
+import baseball.validation.Validate;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 
@@ -41,7 +42,7 @@ public class Controller {
 
 	private String inputCustomBalls() {
 		String balls = InputView.inputBalls();
-		BallsValidation ballsValidation = BallsValidation.checkBalls(balls);
+		Validate ballsValidation = BallsValidation.checkBalls(balls);
 		if (ballsValidation.isProblem()) {
 			OutputView.printErrorMessage(ballsValidation.getErrorMessage());
 			return inputCustomBalls();
@@ -51,7 +52,7 @@ public class Controller {
 
 	private boolean isReGame() {
 		String choiceNumber = InputView.inputChoiceReGame();
-		ReStartValidation reStartValidation = ReStartValidation.checkReStart(choiceNumber);
+		Validate reStartValidation = ReStartValidation.checkReStart(choiceNumber);
 		if (reStartValidation.isProblem()) {
 			OutputView.printErrorMessage(reStartValidation.getErrorMessage());
 			return isReGame();
