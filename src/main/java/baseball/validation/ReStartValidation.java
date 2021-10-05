@@ -2,7 +2,7 @@ package baseball.validation;
 
 import java.util.Objects;
 
-public class ReStartValidation {
+public class ReStartValidation implements Validate {
 
 	private static final String CHOICE_NUMBER_RANGE_ERROR_MESSAGE = "선택 숫자는 1또는 2만 가능합니다.";
 	private static final String INT_REG_EXP = "[12]";
@@ -27,10 +27,12 @@ public class ReStartValidation {
 		return !checkNumber.matches(INT_REG_EXP);
 	}
 
+	@Override
 	public boolean isProblem() {
 		return errorStatus;
 	}
 
+	@Override
 	public String getErrorMessage() {
 		return message;
 	}

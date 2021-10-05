@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class BallsValidation {
+public class BallsValidation implements Validate {
 
 	private static final String CHECK_BALL_RANGE_ERROR_MESSAGE = "볼은 1~9의 숫자만 가능 합니다.";
 	private static final String CHECK_BALL_SIZE_ERROR_MESSAGE = "중복된 입력값이존재하거나 3자리의 입력값이 아닙니다.";
@@ -44,10 +44,12 @@ public class BallsValidation {
 		return !balls.matches(INT_REG_EXP);
 	}
 
+	@Override
 	public boolean isProblem() {
 		return errorStatus;
 	}
 
+	@Override
 	public String getErrorMessage() {
 		return message;
 	}
